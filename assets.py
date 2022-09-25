@@ -1,5 +1,5 @@
 from classes.town import Town
-from classes.route import Route
+from classes.road import Road
 
 def get_towns():
     coord_file = open("./data/coordinates.txt", "r")
@@ -11,9 +11,9 @@ def get_towns():
 
     return town_list
 
-def get_routes(town_list):
+def get_roads(town_list):
     adj_file = open("./data/adjacencies.txt", "r")
-    route_list = []
+    road_list = []
     for line in adj_file.readlines():
         line = line.split()
         start = line[0]
@@ -22,5 +22,5 @@ def get_routes(town_list):
             if (start == town or (town not in town_list)):
                 continue
 
-            route = Route(town_list[start], town_list[town])
-            route_list.append(route)
+            road = Road(town_list[start], town_list[town])
+            road_list.append(road)
