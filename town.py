@@ -1,11 +1,12 @@
 import numpy as np
+import pandas as pd
 
 class Town:
     def __init__(self, name, lat, lon):
         """Initialize a town with a name, latitude, longitude, and neighbors."""
         self.name = name
-        self.latitude = lat
-        self.longitude = lon
+        self.latitude = pd.to_numeric(lat)
+        self.longitude = pd.to_numeric(lon)
         self.neighbors = set() #{}
 
     def distance(self, other):

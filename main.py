@@ -19,11 +19,29 @@ current_town = town_list[start]
 
 # while (current_town.name != goal):
 while True:
-    # populate frontier list
+    # identify the frontier town closest to the goal
     frontier = town_list[current_town.name].neighbors
-    print(frontier)
-    break
+    closest = {
+        "name": None,
+        "distance": float("inf")
+    }
+    for town in frontier:
+        distance = town_list[town].distance(town_list[goal])
+        if (distance < closest["distance"]):
+            closest["name"] = town
+            closest["distance"] = distance
+
     # add it to the path
+    path.append(closest["name"])
+    current_town = town_list[closest["name"]]
+
     # if it's the goal, stop
+    if (current_town.name == goal):
+        print("Path found!")
+        break
+
     # if it's a dead end, backtrack
     # otherwise, keep searching
+
+    print("Not found yet!")
+    break
