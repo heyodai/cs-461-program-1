@@ -16,7 +16,7 @@ while True:
 # find the shortest path
 path = []
 current_town = town_list[start]
-do_not_check = None
+latest_dead_end = None
 
 # while (current_town.name != goal):
 while True:
@@ -27,7 +27,7 @@ while True:
         "distance": float("inf")
     }
     for town in frontier:
-        if (town in path or town == do_not_check):
+        if (town in path or town == latest_dead_end):
             # we've already been here
             continue
 
@@ -37,14 +37,10 @@ while True:
             closest["distance"] = distance
 
     if (closest["name"] is None):
-        # no more frontier towns
-        # time to backtrack
-
-        do_not_check = current_town.name
+        # no more frontier towns, time to backtrack
+        latest_dead_end = current_town.name
         path.pop()
         current_town = town_list[path[-1]]
-
-        print("Backtracking to", current_town.name)
         continue
     else:
         # add it to the path
@@ -54,8 +50,5 @@ while True:
     # if it's the goal, stop
     if (current_town.name == goal):
         print("Path found!")
+        print(start + " -> " + " -> ".join(path))
         break
-
-    print("Not found yet!")
-    print(path)
-    # break
