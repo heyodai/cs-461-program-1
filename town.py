@@ -16,6 +16,7 @@ class Town:
         return np.linalg.norm(p1 - p2)
 
 def populate():
+    """Populate the town list with data from the text files."""
     town_list = {}
 
     # read in town names and coordinates
@@ -41,7 +42,6 @@ def populate():
                 if (neighbor not in town_list[start].neighbors):
                     town_list[neighbor].neighbors.add(start)
 
-        # town_list[start].neighbors.add(neighbor_list)
         for item in neighbor_list:
             town_list[start].neighbors.add(item)
 
